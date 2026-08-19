@@ -1,0 +1,23 @@
+# [Gemini AI 문제] 변수 선언, 변수 초기화, 변수 할당, 콘솔 출력 (자바 기초)
+
+**사용 언어:** Java
+
+package variable.ex;
+
+public class VarEx_AI_1 {
+    public static void main(String[] args) {
+        int usedSpace = 360; // usedSpace: 사용중인 용량
+        int freeSpace = 640; // freeSpace: 남은 용량
+        int totalSpace = usedSpace + freeSpace;
+
+        System.out.println(totalSpace);
+    }
+}
+
+### 풀이 핵심
+디스크 사용중인 용량인 usedSpace 변수와 남아 있는 디스크 용량인 freeSpace 변수를 정수형 int를 선언한다.
+그런 후, 각 변수를 더해서 totalSpace 변수를 int로 선언해서 콘솔로 출력한다. 
+
+### 개선될 점
+1. 콘솔에 출력될 의미와 단위 부여(GB) 
+2. 작성된 코드의 주석 부분 다듬기
