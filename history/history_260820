@@ -1,0 +1,89 @@
+# [Gemini AI 문제] 변수 선언, 변수 초기화, 변수 할당, 콘솔 출력 + 연산자 종합 문제(2문제)
+
+**사용 언어:** Java
+  
+package variable.ex;
+
+public class VarEx_AI_2 {
+    public static void main(String[] args) {
+        int totalFare = 125000; // 대중교통 총 요금 단위(원)
+        int tripCount = 43; // 이용 횟수
+
+        double averageFare = (totalFare / tripCount);
+
+        System.out.println("1회 평균 대중교통 요금은 " + averageFare + "원 입니다.");
+    }
+}
+
+### 풀이 핵심
+대중교통 총 요금 단위와 이용횟수를 정수형으로 선언한 후 두 값을 나눠 평균 대중교통 요금을 구한다.
+사용한 문법: 형변환, 산술 연산자
+
+### 개선될 점
+1. totalFare과 tripCount 변수는 정수형 타입이기 때문에 정수형끼리 나누게 되면 소수점을 표현할 수 없다. 그래서, 두 변수를 double 타입으로 강제 형변환을 진행해주면 된다.
+double averageFare = (double) (totalFare / tripCount)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+package operator.ex;
+
+public class Oper_AI_Test1 {
+    public static void main(String[] args) {
+        int maxMemory = 16000; // 최대 메모리 용량 16000GB
+        int usedMemory = 13000; // 사용중인 메모리 용량 13000GB
+        int errorLogCount = 4; // 에러 로그 발생 횟수
+
+        ++errorLogCount;
+        int memoryUsage = ((usedMemory * 100) / maxMemory); // 현재 메모리 사용률(%)
+        boolean isAlert = memoryUsage >= 80 && errorLogCount >= 5;
+
+        System.out.println("최종적으로 isAlert 값은 " + isAlert + " 입니다.");
+    }
+}
+
+### 풀이 핵심
+최대 메모리 용량과 사용중인 메모리 용량, 에러 로그 발생 횟수를 정수형 타입으로 선언하고 임의의 값으로 초기화한다.
+에러 로그가 발생했을 때 errorLogCount 변수를 1씩 증가시키고 maxMemory, usedMemory 변수를 이용해서 현재 메모리 사용률인 memoryUsage를 구한다.
+그런 후 memoryUsage가 80% 이상이고 errorLogCount 값이 5일 경우 경고가 표시되도록 한다.
+사용된 문법은 변수 선언, 변수 초기화, 변수 할당, 산술 연산자, 우선 순위 연산자, 논리 연산자, 증감 연산자
+
+### 개선될 점
+콘솔에 출력될 출력문을 개선하기
+  
+[before]
+System.out.println("최종적으로 isAlert 값은 " + isAlert + " 입니다.");
+[after]
+System.out.println("[시스템 상태] 현재 메모리 사용률: " + memoryUsage + "%");
+System.out.println("[시스템 상태] 누적 에러 로그: " + errorLogCount + "건");
+System.out.println("----------------------------------------");
+System.out.println("최종 관리자 알람 발생 여부(isAlert) : " + isAlert);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+package operator.ex;
+
+public class Oper_AI_Test2 {
+    public static void main(String[] args) {
+        int cardBalance = 10000; // K-패스 카드 잔액
+        int transferMinutes = 25; // 환승까지 걸린 시간
+        boolean isSubway = true; // 탑승할 수단이 지하철인지 여부
+        int transferCount = 3; // 남은 환승 가능 횟수
+
+        boolean isDiscount = transferMinutes <= 30 && isSubway == true;
+        if !isDiscount {
+            cardBalance -= 1500;
+        }
+
+        --transferCount;
+        System.out.println("최종 카드 잔액은 " + cardBalance + "원 입니다.");
+        System.out.println("남은 환승 횟수는 " + transferCount + "회 입니다.");
+
+    }
+}
+
+### 풀이 핵심
+cardBalance, transferMinutes 변수를 정수형 타입으로 선언한 후 값을 할당한다.
+isSubway 변수를 탑승할 수단이 지하철인지 여부를 말하며 boolean 타입으로 지정한다.
+transferMinutes가 30분 이하이고 교통수단이 지하철이라면 isDiscount 값을 true로 지정된다.
+
+만약, isDiscount 변수 즉, 할인되지 않는다면 카드 잔액에 1500원을 차감한다. 그리고 환승 가능 횟수를 1을 차감한다.
+
+### 수정해야 될 부분
+Java에서 조건식은 반드시 소괄호로 감싸주어야 한다.
