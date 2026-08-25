@@ -1,0 +1,55 @@
+# [Gemini AI] 종합 문제: 변수, 연산자, 조건문, switch, 삼항연산자
+
+**사용 언어:** Java
+
+package loop.ex;
+
+public class AI_Total_Test_For {
+    public static void main(String[] args) {
+        int level = 1; // 현재 용사 레벨
+        int totalExp = 0; // 누적 경험치
+        int totalGold = 0; // 누적 골드
+
+        for (int stage=1; stage <= 3; stage++) {
+            System.out.println("=== [Stage " + stage + "] 던전 입장 ===");
+            for(int monster=1; monster <=3; monster++) {
+                totalExp += 40;
+                totalGold += 50;
+                System.out.println("[" + stage + "-" + monster + "] 몬스터 처치! (획득: " + totalExp + " Exp / " + totalGold + " Gold)");
+
+                if(totalExp >= 100) {
+                    totalExp -= 100;
+                    System.out.println("★ LEVEL UP! 현재 레벨: [" + ++level + "] (남은 경험치: [" + totalExp + "] EXP) ★");
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("=====================================");
+        System.out.println("[모든 탐험 완료]");
+        System.out.println("최종 레벨: " + level);
+        System.out.println("남은 경험치: " + totalExp + " EXP");
+        System.out.println("총 획득 골드: " + totalGold + " Gold");
+        System.out.println("=====================================");
+    }
+}
+
+### 풀이 핵심
+현재 용사 레벨(level), 누적 경험치(totalExp), 누적 골드(totalGold) 세 개의 변수를 for문 밖에 선언하고
+외부 for문에 stage가 올라가도록 설계.
+내부 for문에는 monster가 1마리씩 증가하도록 설계. 1마리 잡을 때 누적 경험치 +40, 누적 골드 +50씩 증가하고 각 스테이지에 몬스터를 처치하면 totalExp와 totalGold를 확인할 수 있다.
+만약 totalExp가 100이 초과되면 100을 차감하고 level 수치를 1씩 증가한다. 
+모든 스테이지가 완료되면 총 결과를 아래 콘솔 메시지로 보여준다.
+
+### 개선할 점
+1. 출력 메시지 논리적 디테일
+[before]
+System.out.println("[" + stage + "-" + monster + "]
+몬스터 처치! (획득: " + totalExp + " Exp / " + totalGold + " Gold)");
+-> 몬스터 한 마리가 주는 고정 값이기에 해당 부분은 Text로 적어준다.
+  
+[after]
+System.out.println("[" + stage + "-" + monster + "]
+몬스터 처치! (획득: 40 EXP / 50 Gold);
+2. 줄바꿈 처리
+시스템 콘솔 메서드 안에 큰 따옴표를 썼는데 쓸 필요 없다.
+System.out.println("") -> System.out.println()
