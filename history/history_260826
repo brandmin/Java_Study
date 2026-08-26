@@ -1,0 +1,67 @@
+# [Gemini AI] 종합 문제: 변수, 연산자, 조건문, 스코프, 형변환
+
+**사용 언어:** Java
+
+package scope.ex;
+
+public class AI_Total_Test {
+    public static void main(String[] args) {
+        int baseAttack = 100; // 기본 공격력
+        int totalExtraDamage = 35; // 강화를 통해 얻은 총 추가 데미지
+        int upgradeCount = 3; // 강화 시도 횟수
+
+        double averageExtraDamage = (double) totalExtraDamage / upgradeCount;
+
+        int finalAttack = baseAttack + totalExtraDamage; // 최종 공격력
+        if (averageExtraDamage > 10.0) {
+            double magicMultiplier = 1.2;
+            finalAttack = finalAttack  * (int) magicMultiplier;
+            System.out.println(finalAttack);
+        }
+        System.out.println("=== 대장간 강화 결과 ===");
+        System.out.println("1회당 평균 추가 데미지: " + averageExtraDamage);
+        System.out.println("(축하합니다! 평균치가 높아 마법이 부여됩니다.");
+        System.out.println("최종 마법 공격력: " + finalAttack);
+//        System.out.println(magicMultiplier);  java: cannot find symbol 발생.
+        // magicMultiplier 변수는 if 구문안에서만 사용할 수 있는 변수기 때문에 if문이 종료되면 사라짐
+
+    }
+}
+
+### 코드 풀이 핵심
+1. 각 변수를 선언하고 초기화를 하였다.
+2. 소수점을 살리도록 int형에서 double로 자동 형변환을 하였다.
+3. 추가 데미지가 10.0 보다 크다면 if구문을 활용하여 마법 공격력이 부여되도록 설계하였다.
+4. magicMultiplier 변수는 double 형이기에 int로 강제 형변환을 진행한다.
+
+### 개선할 점
+1. 왜 162가 아니라 135가 나오는 것인지?
+-> 형변환의 위치와 순서에 원인이 있다.
+
+finalAttack = finalAttack * (int) magicMultiplier;
+-> Java는 곱하기(*)보다 형변환을 먼저 처리한다.
+그래서, 1.2가 곱해지는 것이 아닌 1로 곱해져서 135가 그대로 나온다.
+-> 형변환을 finalAttack 앞에 (int)를 선언하고 각 변수를 괄호로 묶어서 하면 좋을 거 같다.
+
+finalAttack = (int) (finalAttack * magicMultiplier);
+
+#### 자바의 우선순위(필독, 중요)
+우선순위	          구분	                    연산자	결합 방향
+1	최우선 연산자	( ) [ ] .	                ➡️ (좌에서 우)
+2	단항 연산자	++ -- + - ~ ! (type)	      ⬅️ (우에서 좌)
+3	산술 연산자 (곱셈/나눗셈)	* / %    	      ➡️ (좌에서 우)
+4	산술 연산자 (덧셈/뺄셈)	+ -	              ➡️ (좌에서 우)
+5	시프트 연산자	<< >> >>>          	      ➡️ (좌에서 우)
+6	비교 연산자 (크기)	< <= > >= instanceof	➡️ (좌에서 우)
+7	비교 연산자 (동등)	== !=	                ➡️ (좌에서 우)
+8	비트 연산자 (AND)	&	                    ➡️ (좌에서 우)
+9	비트 연산자 (XOR)	^	                    ➡️ (좌에서 우)
+10	비트 연산자 (OR)	\|	                  ➡️ (좌에서 우)
+11	논리 연산자 (AND)	&&	                ➡️ (좌에서 우)
+12	논리 연산자 (OR)	\|\|	                ➡️ (좌에서 우)
+13	삼항 연산자	? :                      	⬅️ (우에서 좌)
+14	대입 연산자	= += -= *= /= %= 등	      ⬅️ (우에서 좌)
+
+### 회고록, 느낀점
+문제의 요구사항에 맞게 코드를 작성하였지만 형변환보다 산술 연산자가 우선적으로 계산되어 처리되는 줄 알고 있었다.
+그래서, 아래 표에 있는 Java의 우선순위를 확인하면서 코드 작성할 때 유의하면서 보기로 하자.
