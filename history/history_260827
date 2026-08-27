@@ -1,0 +1,82 @@
+# [Gemini AI] 종합 문제: 변수, 연산자, 조건문, Scanner, while 반복문
+
+**사용 언어:** Java
+
+package scanner.ex;
+
+import java.util.Scanner;
+
+public class Scanner_AI_Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int str = 0; // 근력
+        int agi = 0; // 민첩
+        int temp;
+
+        System.out.println("=== 24시간 신비한 스탯 교환소 ===");
+        System.out.println("(종료하려면 근력에 -1을 입력하세요)");
+        while (true) {
+            if (str == -1) {
+                System.out.println("교환소 영업을 종료합니다. 수고하셨습니다!");
+                break;
+            }
+
+            System.out.print("현재 근력(STR) 스탯을 입력하세요: ");
+            str = sc.nextInt();
+
+            System.out.print("현재 민첩(AGI) 스탯을 입력하세요: ");
+            agi = sc.nextInt();
+
+            temp = str;
+            str = agi;
+            agi = temp;
+
+
+            System.out.println("[마법 시전 후] 변경된 스탯: 근력 " + str + ", 민첩 " + agi);
+            System.out.println("=================================================");
+        }
+    }
+}
+
+### 코드 리뷰
+1. Scanner 객체 생성과 while (true) 무한 루프의 뼈대를 익힘.
+2. temp를 활용한 교환 로직(swap)을 구현함.
+3. 종료 조건(if) 위치 때문에 -1을 입력해도 바로 종료되지 않음.
+
+### 개선점
+근력에 -1을 입력해도 민첩까지 -1을 입력해야 프로그램이 종료되는 치명적인 버그가 발생하는 것을 확인할 수 있다.
+if 조건문의 위치만 변경해도 깔끔하게 프로그램이 종료되는 것을 확인할 수 있다.
+[before]
+while (true) {
+            if (str == -1) {
+                System.out.println("교환소 영업을 종료합니다. 수고하셨습니다!");
+                break;
+            }
+
+            System.out.print("현재 근력(STR) 스탯을 입력하세요: ");
+            str = sc.nextInt();
+
+            System.out.print("현재 민첩(AGI) 스탯을 입력하세요: ");
+            agi = sc.nextInt();
+
+[after]
+while (true) {
+            System.out.print("현재 근력(STR) 스탯을 입력하세요: ");
+            str = sc.nextInt();
+            if (str == -1) {
+                System.out.println("교환소 영업을 종료합니다. 수고하셨습니다!");
+                break;
+            }
+
+            System.out.print("현재 민첩(AGI) 스탯을 입력하세요: ");
+            agi = sc.nextInt();
+}
+
+### 추가로 학습할 점
+1. 자원 해제(Scanner 닫기)
+-> Scanner 기능을 사용을 마쳤다면 close() 메서드를 사용하여 종료한다.
+2. 디버깅 연습
+오류가 나오지 않게 항상 디버깅 하는 연습을 가지자.
+
+### 느낀 점
+if 조건문의 위치만 잘 변경해도 완벽한 코드가 구현이 되었을텐데 너무 아쉽다. 디버깅 연습을 하면서 코드가 정상적으로 구동될 수 있도록 열심히 해보자.
