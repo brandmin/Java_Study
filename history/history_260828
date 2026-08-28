@@ -1,0 +1,56 @@
+# [Gemini AI] 종합 문제: 변수, 연산자, 조건문, Scanner, while 반복문
+
+**사용 언어:** Java
+
+package array.ex;
+
+import java.util.Scanner;
+
+public class Array_AI_Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] partyHp = new int[5];
+
+        System.out.println("=== 레이드 파티 체력 관리 ===");
+        for (int i = 0; i< partyHp.length; i++) {
+            System.out.print((i+1) + "번 파티원의 체력을 입력하세요: ");
+            partyHp[i] = sc.nextInt();
+        }
+        System.out.println("-------------------------------");
+        System.out.println("[치유 진행 중...]");
+        for (int i=0; i< partyHp.length; i++) {
+            if(partyHp[i] < 50) {
+                partyHp[i] += 30;
+                System.out.println("[" + (i+1) + "번 파티원]의 체력이 50 미만이라 힐링 마법을 시전합니다! (체력 +30)");
+            }
+        }
+
+        System.out.println("-------------------------------");
+        System.out.println("[최종 파티원 체력 상태]");
+        for (int i=0; i< partyHp.length; i++) {
+            System.out.println((i+1) + "번 파티원 HP: " + partyHp[i]);
+        }
+    }
+}
+
+### 풀이 핵심
+1. 입력, 처리, 출력이라는 프로그램의 3단계 흐름에 맞춰 for 구문을 분리하였다.
+2. 배열의 크기를 동적으로 처리해주는 .length 속성을 사용하여 동적 메모리 할당에 대응함.
+3. 0번 인덱스를 사람에게 1번을 보여주도록 (i+1) 디테일을 보여줌
+
+### 개선점
+Scanner 자원 정리
+-> 어제 개선점에도 Scanner 기능을 사용을 마치고 close() 메서드를 사용하여 기능을 종료해야 되는데 그런 디테일 부분을 가져가지 못했다.
+
+### 추가로 학습할 부분
+향상된 for문 사용
+[before]
+
+for (int i=0; i< partyHp.length; i++) {
+    System.out.println(partyHp[i]);
+}
+[after]
+
+for (int hp : partyHp) { // partyHp 배열 안에 있는 값들을 처음부터 끝까지 하나씩 꺼내서, hp라는 변수에 담아 반복
+	System.out.println(hp);
+}
