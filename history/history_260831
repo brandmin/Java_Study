@@ -1,0 +1,81 @@
+# [Gemini AI] 복 문제: 메서드, 메서드 형변환, 메서드 오버로딩
+
+**사용 언어:** Java
+
+[문제1] 연금술사의 포션 제작(메서드와 형변환)
+package method.ex;
+
+public class Method_AI_Test1 {
+    public static void main(String[] args) {
+        double rawHerb = 4.8; // 약초 무게
+        double magic = 1.5; // 마력 농도
+        double fianlPotion = craftPotion((int) rawHerb, magic);
+
+        System.out.println("=== 포션 제작 결과 ===");
+        System.out.println("전달된 약초 개수: " + (int) rawHerb + "개 (소수점 버려짐)");
+        System.out.println("완성된 포션의 총 회복량: " + fianlPotion + " HP");
+    }
+
+    public static double craftPotion (int herbCount, double magicPower) {
+         double total = herbCount * magicPower * 10.0;
+         return total;
+    }
+}
+
+[문제2] 용사의 다채로운 공격(메서드 오버로딩)
+
+package overloading.ex;
+
+public class Overloading_AI_Test {
+    public static void main(String[] args) {
+        System.out.println("===  용사의 공격 시스템 ===");
+        attack();
+        attack("강철 검");
+        attack("전설의 활", 150);
+    }
+
+    public static void attack() {
+        System.out.println("맨손 공격! 데미지: 10");
+    }
+
+    public static void attack(String weapon) {
+        System.out.println("[" + weapon + "] 공격! 데미지: 20");
+    }
+
+    public static void attack(String weapon, int damage) {
+        System.out.println("[" + weapon + "] 치명타! 데미지: " + damage);
+    }
+}
+
+### 코드 리뷰(2개 문제)
+1. [문제 1] double 변수를 int 매개변수에 넣기 위해 메서드 호출부에서 명시적 형변환 사용하였다.
+2. [문제 2] 메서드 이름은 attack으로 모두 같지만, 괄호 안의 매개변수를 다르게 구성하여 메서드 오버로딩 구현하였다.
+
+### 개선점
+1. 오타 수정하기
+
+double fianlPotion = craftPotion((int) rawHerb, magic);
+finalPotion 변수를 입력했어야 하는데 변수 입력하다보니 오타가 발생하였다.
+
+2. 코드 유지보수
+[before]
+
+public static double craftPotion (int herbCount, double magicPower) {
+         double total = herbCount * magicPower * 10.0;
+         return total;
+}
+-> 임의의 변수인 total를 선언해서 값을 계산 후 할당하고 이후 return하는 방식으로 하지말고 바로 포션을 제작하는 공식을 적용하여 return 반환한다.
+[after]
+
+public static double craftPotion (int herbCount, double magicPower) {
+     return herbCount * magicPower * 10.0; 
+}
+
+### AI가 확인했을 때 추가로 학습했으면 하는 부분
+1) 오버로딩 함정 (반환 타입)
+오버로딩을 할 때 가장 많이 하는 실수는 반환 타입(void, int 등) 다르게 하면 오버로딩이 되는지?
+-> Java는 메서드를 찾을 때 오직 매개변수(파라미터)만 본다. 매개변수를 같게 하면 두 개의 메서드 인 줄 알고 착각해서 에러를 발생시킨다.
+
+### 느낀점
+해당 메서드 오버로딩 문제로 정처기 문제 풀었을 때 헷갈린 경험이 있다.
+이 부분을 반드시 이해해서 정처기 문제 푸는데 도움이 되도록 하자.
